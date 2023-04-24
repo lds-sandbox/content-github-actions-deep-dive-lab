@@ -9,16 +9,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      BUCKET_NAME: cfst-3457-b2d8993a4030226f753981120-nonprodbucket-yjk141b2o1w2
+      BUCKET_NAME: acglab-ghaction-nonproduction
+      AWS_REGION: us-east-1
     steps:
       - name: checkout code
         uses: actions/checkout@v2
       - name: configure aws cli
         uses: aws-actions/configure-aws-credential@v2
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          role-to-assume: arn:aws:iam::525180147276:role/github-actions-deep-dive-role
+          role-session-name: acglabrolesession
+          aws-region: ${{ env.AWS_REGION }}
       - name: set up node js
         uses: actions/setup-node@v2
         with:
