@@ -22,6 +22,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::525180147276:role/github-actions-deep-dive-role
           role-session-name: acglabrolesession
+          aws-region: ${{ env.AWS_REGION }}
       - name: set up node js
         uses: actions/setup-node@v2
         with:
